@@ -775,31 +775,47 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;position:relative;z-
     <!-- Inner: fixed proper Taiji / Yin-Yang -->
     <svg class="e-inner" viewBox="0 0 120 120">
       <defs>
-        <radialGradient id="yangGrad" cx="50%" cy="25%" r="40%">
-          <stop offset="0%" stop-color="#d4351f"/>
-          <stop offset="100%" stop-color="#8a1812"/>
+        <!-- Clip right half for yang base -->
+        <clipPath id="clipRight">
+          <rect x="60" y="4" width="56" height="112"/>
+        </clipPath>
+        <!-- Clip left half for yin base -->
+        <clipPath id="clipLeft">
+          <rect x="4" y="4" width="56" height="112"/>
+        </clipPath>
+        <!-- Clip to outer circle -->
+        <clipPath id="clipCircle">
+          <circle cx="60" cy="60" r="56"/>
+        </clipPath>
+        <radialGradient id="yangG" cx="50%" cy="35%" r="55%">
+          <stop offset="0%" stop-color="#e84030"/>
+          <stop offset="60%" stop-color="#c02018"/>
+          <stop offset="100%" stop-color="#7a1010"/>
         </radialGradient>
-        <radialGradient id="yinGrad" cx="50%" cy="75%" r="40%">
-          <stop offset="0%" stop-color="#1a0205"/>
-          <stop offset="100%" stop-color="#0c0010"/>
+        <radialGradient id="yinG" cx="50%" cy="65%" r="55%">
+          <stop offset="0%" stop-color="#200508"/>
+          <stop offset="100%" stop-color="#080010"/>
         </radialGradient>
-        <filter id="gf"><feGaussianBlur stdDeviation="1.5"/></filter>
+        <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
-      <!-- Glow ring -->
-      <circle cx="60" cy="60" r="56" fill="none" stroke="#c9a84c" stroke-width="1.2" opacity=".7"/>
-      <circle cx="60" cy="60" r="57" fill="none" stroke="#b5291a" stroke-width="3" opacity=".08" filter="url(#gf)"/>
-      <!-- Yang (upper, red) half via correct arc path -->
-      <path d="M60,4 A56,56 0 0,1 60,116 A28,28 0 0,1 60,60 A28,28 0 0,0 60,4 Z" fill="url(#yangGrad)"/>
-      <!-- Yin (lower, dark) half -->
-      <path d="M60,4 A56,56 0 0,0 60,116 A28,28 0 0,0 60,60 A28,28 0 0,1 60,4 Z" fill="url(#yinGrad)"/>
-      <!-- Small circles: yang dot in yin, yin dot in yang -->
-      <circle cx="60" cy="32" r="11" fill="url(#yangGrad)"/>
-      <circle cx="60" cy="88" r="11" fill="url(#yinGrad)"/>
-      <circle cx="60" cy="32" r="4.5" fill="#0c0010"/>
-      <circle cx="60" cy="88" r="4.5" fill="#d4351f" opacity=".9"/>
-      <!-- Outer decorative dots -->
-      <circle cx="60" cy="4" r="2" fill="#f0d070" opacity=".7"/>
-      <circle cx="60" cy="116" r="2" fill="#f0d070" opacity=".7"/>
+      <!-- 1. Dark yin background circle -->
+      <circle cx="60" cy="60" r="56" fill="url(#yinG)"/>
+      <!-- 2. Red yang: right half of outer circle -->
+      <circle cx="60" cy="60" r="56" fill="url(#yangG)" clip-path="url(#clipRight)"/>
+      <!-- 3. Yang bulge: upper small circle (red), fully overlaps upper half -->
+      <circle cx="60" cy="32" r="28" fill="url(#yangG)"/>
+      <!-- 4. Yin dent: lower small circle (dark), covers lower portion -->
+      <circle cx="60" cy="88" r="28" fill="url(#yinG)"/>
+      <!-- 5. Tiny dots: yin dot in yang zone, yang dot in yin zone -->
+      <circle cx="60" cy="32" r="7" fill="#080010"/>
+      <circle cx="60" cy="88" r="7" fill="#e84030"/>
+      <!-- 6. Decorative gold ring -->
+      <circle cx="60" cy="60" r="56" fill="none" stroke="#c9a84c" stroke-width="1.4" opacity=".8"/>
+      <!-- 7. Cardinal gold marks -->
+      <circle cx="60" cy="5" r="2.5" fill="#f0d070" opacity=".9"/>
+      <circle cx="114" cy="60" r="2.5" fill="#f0d070" opacity=".9"/>
+      <circle cx="60" cy="115" r="2.5" fill="#f0d070" opacity=".9"/>
+      <circle cx="6" cy="60" r="2.5" fill="#f0d070" opacity=".9"/>
     </svg>
     <!-- 3 orbiting energy dots -->
     <div class="orbit-dot od1"></div>
