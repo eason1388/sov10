@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>隨緣堂｜命理玄學・道法自然・專業命理諮詢</title>
-<meta name="description" content="隨緣堂提供八字命盤、紫微斗數、陽宅風水、塔羅占卜等專業命理服務，線上免費排盤，歡迎預約諮詢。">
+<meta name="description" content="隨緣堂成立於2016年，提供八字命盤、紫微斗數、陽宅風水、姓名學等專業命理服務，線上免費排盤，歡迎預約諮詢。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
@@ -13,14 +13,18 @@
    DESIGN TOKENS
 ═══════════════════════════════════════════ */
 :root{
-  --bg:#050009;
-  --bg2:#0a0110;
+  --bg:#04000d;
+  --bg2:#080014;
   --red:#b5291a;--red2:#d4351f;--red3:#8a1812;
   --gold:#c9a84c;--gold2:#f0d070;--gold3:#a07828;
+  --jade:#1a9b6c;--jade2:#24d494;--jade3:#0d7a52;
+  --indigo:#4c2bbf;--indigo2:#7c5de8;--indigo3:#2d1880;
+  --teal:#0d8fa0;--teal2:#1dd4e8;--teal3:#085f6e;
   --text:#eddfc0;--dim:#9a8464;--muted:#6a5840;
-  --card:#0e0115;--card2:#140220;
+  --card:#08000f;--card2:#100018;
   --border:rgba(201,168,76,.28);--border2:rgba(181,41,26,.35);
   --glow-r:rgba(181,41,26,.55);--glow-g:rgba(201,168,76,.45);
+  --glow-j:rgba(26,155,108,.45);--glow-i:rgba(124,93,232,.45);
   --shine:linear-gradient(135deg,rgba(240,208,112,.15) 0%,transparent 50%,rgba(240,208,112,.08) 100%);
   --r4:4px;--r8:8px;--r12:12px;--r20:20px;
 }
@@ -35,6 +39,73 @@ button{font-family:inherit}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:#060010}
 ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--gold),var(--red));border-radius:3px}
+
+/* ── FLOATING RUNES (hero bg) ── */
+.rune{position:absolute;pointer-events:none;user-select:none;font-family:serif;animation:runeFloat linear infinite;opacity:0}
+.rune:nth-child(1){left:5%;font-size:1.6rem;color:#c9a84c;animation-duration:8s;animation-delay:0s}
+.rune:nth-child(2){left:15%;font-size:1.2rem;color:#1dd4e8;animation-duration:11s;animation-delay:1.5s}
+.rune:nth-child(3){left:25%;font-size:2rem;color:#7c5de8;animation-duration:9s;animation-delay:3s}
+.rune:nth-child(4){left:40%;font-size:1.4rem;color:#b5291a;animation-duration:12s;animation-delay:.8s}
+.rune:nth-child(5){left:55%;font-size:1.8rem;color:#24d494;animation-duration:10s;animation-delay:2.2s}
+.rune:nth-child(6){left:68%;font-size:1.3rem;color:#f0d070;animation-duration:7.5s;animation-delay:4s}
+.rune:nth-child(7){left:78%;font-size:2.2rem;color:#1dd4e8;animation-duration:13s;animation-delay:1s}
+.rune:nth-child(8){left:88%;font-size:1.5rem;color:#c9a84c;animation-duration:9.5s;animation-delay:5s}
+.rune:nth-child(9){left:92%;font-size:1rem;color:#7c5de8;animation-duration:8.5s;animation-delay:2.5s}
+@keyframes runeFloat{
+  0%{transform:translateY(100vh) rotate(0deg) scale(.6);opacity:0}
+  5%{opacity:.2}
+  90%{opacity:.18}
+  100%{transform:translateY(-120px) rotate(360deg) scale(1);opacity:0}
+}
+
+/* ── AURORA BG OVERLAY ── */
+.aurora-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.aurora-band{position:absolute;width:200%;height:180px;left:-50%;border-radius:50%;filter:blur(60px);animation:aurora 12s ease-in-out infinite}
+.ab1{top:20%;background:radial-gradient(ellipse,rgba(181,41,26,.07) 0%,transparent 65%);animation-delay:0s}
+.ab2{top:45%;background:radial-gradient(ellipse,rgba(76,43,191,.06) 0%,transparent 65%);animation-delay:4s}
+.ab3{top:70%;background:radial-gradient(ellipse,rgba(13,143,160,.05) 0%,transparent 65%);animation-delay:8s}
+
+/* ── HERO h1 glowing title ── */
+.hero h1{animation:textGlow 4s ease-in-out infinite}
+
+/* ── SECTION COLOR ACCENTS ── */
+.section-bg{background:linear-gradient(180deg,var(--bg) 0%,rgba(8,0,20,.95) 100%)}
+.section-bg2{background:linear-gradient(180deg,rgba(6,0,18,.98) 0%,var(--bg2) 100%)}
+
+/* ── CARD ANIMATED BORDERS ── */
+.srv-card{animation:borderFlow 8s ease infinite}
+.art-card{animation:borderFlow 10s ease infinite}
+.testi-card{animation:borderFlow 9s ease infinite 1s}
+
+/* ── COLORED SECTION EYEBROWS ── */
+.sec-eyebrow{
+  background:linear-gradient(90deg,var(--teal2),var(--gold),var(--indigo2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  background-size:200%;animation:shimmer 4s linear infinite;
+}
+
+/* ── JADE accent for specific sections ── */
+#liuyao .sec-head h2,#meihua .sec-head h2{
+  background:linear-gradient(135deg,var(--jade2),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+#nameanalysis .sec-head h2{
+  background:linear-gradient(135deg,var(--indigo2),var(--teal2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+#zodiac .sec-head h2{
+  background:linear-gradient(135deg,var(--teal2),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ── STAT BAR PULSE ── */
+.stat-num{animation:pulseGlow 3s ease-in-out infinite}
+
+/* ── CURSOR ORB MULTICOLOR ── */
+.cursor-orb{
+  background:radial-gradient(circle,rgba(181,41,26,.04) 0%,rgba(76,43,191,.03) 40%,transparent 70%);
+  width:480px;height:480px;
+}
 
 /* ── CANVAS ── */
 canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
@@ -98,13 +169,23 @@ nav.scrolled{background:rgba(5,0,9,1);box-shadow:0 4px 30px rgba(0,0,0,.6)}
   color:rgba(181,41,26,.04);pointer-events:none;user-select:none;
   white-space:nowrap;letter-spacing:.1em;
 }
-.emblem-wrap{position:relative;width:200px;height:200px;margin:0 auto 2.5rem}
-.e-outer{width:200px;height:200px;animation:spin 40s linear infinite;filter:drop-shadow(0 0 20px rgba(201,168,76,.3))}
-.e-inner{width:150px;height:150px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:spin 20s linear infinite reverse}
+.emblem-wrap{position:relative;width:220px;height:220px;margin:0 auto 2.8rem}
+.e-outer{width:220px;height:220px;animation:spin 50s linear infinite;filter:drop-shadow(0 0 24px rgba(201,168,76,.35))}
+.e-mid{width:160px;height:160px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:spinR 25s linear infinite}
+.e-inner{width:120px;height:120px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);filter:drop-shadow(0 0 12px rgba(181,41,26,.5)) drop-shadow(0 0 24px rgba(201,168,76,.25))}
+/* orbiting energy dots */
+.orbit-dot{position:absolute;top:50%;left:50%;width:8px;height:8px;border-radius:50%;margin:-4px 0 0 -4px}
+.od1{background:radial-gradient(circle,#f0d070,#c9a84c);box-shadow:0 0 10px #f0d070,0 0 20px rgba(240,208,112,.6);animation:orbitDot 6s linear infinite}
+.od2{background:radial-gradient(circle,#1dd4e8,#0d8fa0);box-shadow:0 0 10px #1dd4e8,0 0 20px rgba(29,212,152,.6);animation:orbitDot2 6s linear infinite}
+.od3{background:radial-gradient(circle,#b5291a,#d4351f);box-shadow:0 0 10px #d4351f,0 0 20px rgba(212,53,31,.6);animation:orbitDot3 6s linear infinite}
+/* energy pulse rings */
+.energy-ring{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid;pointer-events:none}
+.er1{width:240px;height:240px;border-color:rgba(201,168,76,.2);animation:energyRing 3.5s ease-in-out infinite}
+.er2{width:280px;height:280px;border-color:rgba(29,212,232,.12);animation:energyRing 3.5s ease-in-out infinite .8s}
 .hero h1{
   font-family:'Ma Shan Zheng',cursive;
   font-size:clamp(5rem,10vw,10rem);
-  background:linear-gradient(180deg,var(--gold2) 0%,var(--gold) 50%,var(--gold3) 100%);
+  background:linear-gradient(180deg,#fff5c0 0%,var(--gold2) 25%,var(--gold) 55%,var(--gold3) 80%,#c97a20 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   letter-spacing:.22em;line-height:1;margin-bottom:.5rem;
   filter:drop-shadow(0 0 40px rgba(201,168,76,.3));
@@ -179,7 +260,7 @@ section{padding:6rem 2rem;max-width:1300px;margin:0 auto}
 }
 .sec-head p{font-size:1.05rem;color:var(--dim);letter-spacing:.1em;max-width:520px;margin:0 auto}
 .sec-divider{display:flex;align-items:center;gap:1.2rem;justify-content:center;margin-top:1.2rem}
-.sec-divider::before,.sec-divider::after{content:'';flex:1;max-width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.sec-divider::before,.sec-divider::after{content:'';flex:1;max-width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold2),var(--teal2),transparent)}
 .sec-divider::after{background:linear-gradient(90deg,var(--gold),transparent)}
 .sec-divider span{color:var(--gold);font-size:.9rem}
 .section-bg{background:linear-gradient(180deg,transparent,rgba(181,41,26,.04),transparent)}
@@ -207,6 +288,9 @@ section{padding:6rem 2rem;max-width:1300px;margin:0 auto}
   line-height:1;display:block;
 }
 .stat-label{font-size:.82rem;color:var(--muted);letter-spacing:.12em;margin-top:.3rem;display:block}
+.stat-item:nth-child(2) .stat-num{color:var(--jade2);text-shadow:0 0 20px rgba(29,212,148,.4)}
+.stat-item:nth-child(3) .stat-num{color:var(--teal2);text-shadow:0 0 20px rgba(29,212,232,.4)}
+.stat-item:nth-child(4) .stat-num{color:var(--indigo2);text-shadow:0 0 20px rgba(124,93,232,.4)}
 .stat-divider{width:1px;background:var(--border)}
 
 /* ── DASHBOARD ── */
@@ -242,35 +326,13 @@ section{padding:6rem 2rem;max-width:1300px;margin:0 auto}
 }
 .oracle-card::before{content:'';position:absolute;inset:0;background:var(--shine);pointer-events:none}
 .oracle-card:hover{box-shadow:0 0 60px rgba(201,168,76,.12)}
-.oracle-glow{position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:200px;height:200px;background:radial-gradient(circle,rgba(181,41,26,.12),transparent 70%);pointer-events:none}
+.oracle-glow{position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:220px;height:220px;background:radial-gradient(circle,rgba(124,93,232,.15) 0%,rgba(181,41,26,.1) 50%,transparent 70%);pointer-events:none;animation:aurora 8s ease-in-out infinite}
 .oracle-hexagram{font-size:5.5rem;line-height:1;margin-bottom:1.2rem;filter:drop-shadow(0 0 16px rgba(201,168,76,.5))}
 .oracle-name{font-family:'Ma Shan Zheng',cursive;font-size:2.8rem;color:var(--gold2);letter-spacing:.2em;margin-bottom:.4rem}
 .oracle-tag{color:var(--muted);font-size:.95rem;letter-spacing:.1em;margin-bottom:1.5rem}
 .oracle-line{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:.8rem auto}
 .oracle-text{color:var(--text);font-size:1.05rem;line-height:2;margin-bottom:1.4rem}
 .oracle-advice{background:rgba(181,41,26,.1);border-left:3px solid var(--red);padding:.9rem 1.2rem;border-radius:0 var(--r8) var(--r8) 0;color:var(--text);font-size:.93rem;line-height:1.9;text-align:left}
-
-/* ── TAROT ── */
-.tarot-q{width:100%;max-width:520px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--text);padding:.9rem 1.3rem;font-family:'Noto Serif TC',serif;font-size:1rem;border-radius:var(--r8);outline:none;transition:border-color .3s}
-.tarot-q:focus{border-color:var(--gold)}
-.tarot-q::placeholder{color:var(--muted)}
-.t-card{width:125px;height:210px;perspective:1000px;cursor:pointer}
-.t-card-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.4,0,.2,1)}
-.t-card.flipped .t-card-inner{transform:rotateY(180deg)}
-.t-card.shake{animation:cardShake .45s ease}
-@keyframes cardShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-3deg)}75%{transform:translateX(8px) rotate(3deg)}}
-.t-face,.t-back{position:absolute;inset:0;border-radius:var(--r12);backface-visibility:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;border:1px solid var(--border)}
-.t-back{background:linear-gradient(145deg,#18040c,#2e0818);font-size:3rem;position:relative}
-.t-back::before{content:'';position:absolute;inset:8px;border:1px solid rgba(201,168,76,.18);border-radius:var(--r8)}
-.t-back::after{content:'☯';position:absolute;font-size:2rem;color:rgba(201,168,76,.15)}
-.t-face{background:linear-gradient(145deg,#1e060c,#160408);transform:rotateY(180deg);padding:.9rem;text-align:center;gap:.3rem}
-.t-symbol{font-size:2.6rem}
-.t-name{font-size:.88rem;color:var(--gold);letter-spacing:.08em;line-height:1.3}
-.t-meaning{font-size:.75rem;color:var(--muted);line-height:1.6;margin-top:.3rem}
-.tarot-result{margin-top:2.5rem;background:rgba(181,41,26,.07);border:1px solid rgba(181,41,26,.25);border-radius:var(--r12);padding:2rem 2.5rem;display:none}
-.tarot-result.show{display:block}
-.tarot-result h3{font-family:'Ma Shan Zheng',cursive;font-size:2.2rem;color:var(--gold);margin-bottom:1rem}
-.tarot-result p{color:var(--text);line-height:2.1;font-size:1rem}
 
 /* ── SIX YAO ── */
 .coin-btn{width:72px;height:72px;border-radius:50%;background:linear-gradient(145deg,#2a1205,#4a2010);border:2px solid var(--gold);color:var(--gold2);font-family:'Ma Shan Zheng',cursive;font-size:1.6rem;cursor:pointer;transition:all .3s;box-shadow:0 0 14px rgba(201,168,76,.2)}
@@ -304,12 +366,24 @@ section{padding:6rem 2rem;max-width:1300px;margin:0 auto}
   transition:all .35s;cursor:pointer;
 }
 .srv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red3),var(--gold),var(--red3));transform:scaleX(0);transition:transform .4s;transform-origin:left}
+.srv-card:nth-child(2)::before{background:linear-gradient(90deg,var(--jade3),var(--jade2),var(--jade3))}
+.srv-card:nth-child(3)::before{background:linear-gradient(90deg,var(--indigo3),var(--indigo2),var(--indigo3))}
+.srv-card:nth-child(4)::before{background:linear-gradient(90deg,var(--teal3),var(--teal2),var(--teal3))}
+.srv-card:nth-child(5)::before{background:linear-gradient(90deg,var(--red3),var(--red2),var(--red3))}
+.srv-card:nth-child(6)::before{background:linear-gradient(90deg,var(--gold3),var(--gold2),var(--gold3))}
 .srv-card::after{content:'';position:absolute;inset:0;background:var(--shine);opacity:0;transition:opacity .35s;pointer-events:none}
 .srv-card:hover::before{transform:scaleX(1)}
 .srv-card:hover::after{opacity:1}
 .srv-card:hover{transform:translateY(-8px);box-shadow:0 16px 50px rgba(181,41,26,.22)}
 .srv-badge{position:absolute;top:1rem;right:1rem;font-size:.7rem;background:rgba(181,41,26,.2);border:1px solid rgba(181,41,26,.4);color:var(--red2);padding:.25rem .7rem;border-radius:20px;letter-spacing:.08em}
-.srv-icon{font-size:2.8rem;margin-bottom:1.2rem;display:block}
+.srv-icon{font-size:2.8rem;margin-bottom:1.2rem;display:block;transition:filter .4s,transform .4s}
+.srv-card:hover .srv-icon{transform:scale(1.15)}
+.srv-card:nth-child(1) .srv-icon{filter:drop-shadow(0 0 10px rgba(240,208,112,.5))}
+.srv-card:nth-child(2) .srv-icon{filter:drop-shadow(0 0 10px rgba(29,212,148,.55))}
+.srv-card:nth-child(3) .srv-icon{filter:drop-shadow(0 0 10px rgba(124,93,232,.55))}
+.srv-card:nth-child(4) .srv-icon{filter:drop-shadow(0 0 10px rgba(29,212,232,.55))}
+.srv-card:nth-child(5) .srv-icon{filter:drop-shadow(0 0 10px rgba(181,41,26,.65))}
+.srv-card:nth-child(6) .srv-icon{filter:drop-shadow(0 0 10px rgba(240,208,112,.5))}
 .srv-card h3{font-family:'Ma Shan Zheng',cursive;font-size:2rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.5rem}
 .srv-card p{color:var(--muted);font-size:.92rem;line-height:1.85;margin-bottom:1.4rem}
 .srv-price{color:var(--red2);font-size:1.4rem;font-weight:700;letter-spacing:.05em}
@@ -346,7 +420,12 @@ section{padding:6rem 2rem;max-width:1300px;margin:0 auto}
 .testi-quote{font-size:3rem;color:rgba(201,168,76,.2);line-height:1;margin-bottom:.8rem;font-family:serif}
 .testi-text{color:var(--text);font-size:.95rem;line-height:2;margin-bottom:1.2rem}
 .testi-author{display:flex;align-items:center;gap:.8rem}
-.testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--red3),var(--gold3));display:flex;align-items:center;justify-content:center;font-family:'Ma Shan Zheng',cursive;font-size:1.1rem;color:var(--gold2);flex-shrink:0}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--red3),var(--gold3));display:flex;align-items:center;justify-content:center;font-family:'Ma Shan Zheng',cursive;font-size:1.1rem;color:var(--gold2);flex-shrink:0;box-shadow:0 0 10px rgba(181,41,26,.4)}
+.testi-card:nth-child(2) .testi-avatar{background:linear-gradient(135deg,var(--jade),var(--jade3));box-shadow:0 0 10px rgba(26,155,108,.5);color:#e8fff8}
+.testi-card:nth-child(3) .testi-avatar{background:linear-gradient(135deg,var(--indigo2),var(--indigo3));box-shadow:0 0 10px rgba(124,93,232,.5);color:#e8e0ff}
+.testi-card:nth-child(4) .testi-avatar{background:linear-gradient(135deg,var(--teal),var(--teal3));box-shadow:0 0 10px rgba(13,143,160,.5);color:#e0faff}
+.testi-card:nth-child(5) .testi-avatar{background:linear-gradient(135deg,#a01010,var(--red2));box-shadow:0 0 10px rgba(212,53,31,.4)}
+.testi-card:nth-child(6) .testi-avatar{background:linear-gradient(135deg,var(--gold3),#d4a832);box-shadow:0 0 10px rgba(201,168,76,.5);color:#1a0a00}
 .testi-name{color:var(--gold);font-size:.9rem;letter-spacing:.05em}
 .testi-srv{color:var(--muted);font-size:.78rem;margin-top:.15rem}
 .testi-stars{color:var(--gold);font-size:.85rem;letter-spacing:.05rem}
@@ -531,9 +610,21 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;position:relative;z-
 
 /* ── ANIMATIONS ── */
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinR{to{transform:rotate(-360deg)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes float2{0%,100%{transform:translateY(-6px) rotate(3deg)}50%{transform:translateY(8px) rotate(-3deg)}}
 @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes aurora{0%,100%{opacity:.18;transform:rotate(0deg) scale(1)}33%{opacity:.28;transform:rotate(120deg) scale(1.08)}66%{opacity:.15;transform:rotate(240deg) scale(.94)}}
+@keyframes runeFloat{0%{transform:translateY(0) rotate(0deg);opacity:.08}50%{transform:translateY(-30px) rotate(180deg);opacity:.22}100%{transform:translateY(-60px) rotate(360deg);opacity:0}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 18px rgba(201,168,76,.2)}50%{box-shadow:0 0 42px rgba(201,168,76,.55),0 0 80px rgba(181,41,26,.2)}}
+@keyframes borderFlow{0%{border-color:rgba(201,168,76,.25)}33%{border-color:rgba(29,212,148,.3)}66%{border-color:rgba(124,93,232,.3)}100%{border-color:rgba(201,168,76,.25)}}
+@keyframes textGlow{0%,100%{filter:drop-shadow(0 0 20px rgba(201,168,76,.3))}50%{filter:drop-shadow(0 0 50px rgba(201,168,76,.7)) drop-shadow(0 0 80px rgba(181,41,26,.3))}}
+@keyframes orbitDot{0%{transform:rotate(0deg) translateX(110px) rotate(0deg)}100%{transform:rotate(360deg) translateX(110px) rotate(-360deg)}}
+@keyframes orbitDot2{0%{transform:rotate(120deg) translateX(110px) rotate(-120deg)}100%{transform:rotate(480deg) translateX(110px) rotate(-480deg)}}
+@keyframes orbitDot3{0%{transform:rotate(240deg) translateX(110px) rotate(-240deg)}100%{transform:rotate(600deg) translateX(110px) rotate(-600deg)}}
+@keyframes shootingStar{0%{transform:translateX(0) translateY(0);opacity:1}100%{transform:translateX(-400px) translateY(200px);opacity:0}}
+@keyframes energyRing{0%,100%{transform:translate(-50%,-50%) scale(.9);opacity:.15}50%{transform:translate(-50%,-50%) scale(1.15);opacity:.35}}
 </style>
 </head>
 <body>
@@ -609,12 +700,12 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;position:relative;z-
   <ul class="nav-links">
     <li><a href="#" onclick="showPage('main');return false">首頁</a></li>
     <li><a href="#" onclick="scrollToSec('oracle');return false">今日卦象</a></li>
-    <li><a href="#" onclick="scrollToSec('tarot');return false">塔羅</a></li>
+    
     <li><a href="#" onclick="scrollToSec('zodiac');return false">生肖</a></li>
     <li><a href="#" onclick="scrollToSec('services');return false">服務</a></li>
     <li><a href="#" onclick="showPage('paipan');return false">排盤</a></li>
     <li><a href="#" onclick="showPage('articles');return false">文章</a></li>
-    <li><a href="#" onclick="scrollToSec('master');return false">師父介紹</a></li>
+    
   </ul>
   <div class="nav-right">
     <button class="nav-ghost" id="navProfileBtn" onclick="openProfileModal()">⊹ 個人設定</button>
@@ -628,26 +719,95 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;position:relative;z-
 
 <!-- HERO -->
 <section class="hero" id="hero">
+  <!-- Aurora bands -->
+  <div class="aurora-layer">
+    <div class="aurora-band ab1"></div>
+    <div class="aurora-band ab2"></div>
+    <div class="aurora-band ab3"></div>
+  </div>
+  <!-- Floating runes -->
+  <span class="rune" style="bottom:-20px">☰</span>
+  <span class="rune" style="bottom:-20px">☲</span>
+  <span class="rune" style="bottom:-20px">☵</span>
+  <span class="rune" style="bottom:-20px">乾</span>
+  <span class="rune" style="bottom:-20px">坤</span>
+  <span class="rune" style="bottom:-20px">易</span>
+  <span class="rune" style="bottom:-20px">命</span>
+  <span class="rune" style="bottom:-20px">道</span>
+  <span class="rune" style="bottom:-20px">緣</span>
   <div class="hero-bg-text">緣</div>
   <div class="emblem-wrap">
-    <svg class="e-outer" viewBox="0 0 200 200" fill="none">
-      <circle cx="100" cy="100" r="96" stroke="#c9a84c" stroke-width=".8" stroke-dasharray="5 4" opacity=".7"/>
-      <circle cx="100" cy="100" r="82" stroke="#b5291a" stroke-width=".5" opacity=".4"/>
-      <text font-size="15" fill="#c9a84c" font-family="serif" opacity=".85">
-        <tspan x="20" y="108">☰</tspan><tspan x="48" y="57">☱</tspan><tspan x="97" y="10">☲</tspan>
-        <tspan x="148" y="57">☳</tspan><tspan x="172" y="108">☴</tspan>
-        <tspan x="148" y="154">☵</tspan><tspan x="97" y="197">☶</tspan><tspan x="48" y="154">☷</tspan>
+    <!-- Outer ring: 8 trigrams, slowly spinning -->
+    <svg class="e-outer" viewBox="0 0 220 220" fill="none">
+      <defs>
+        <radialGradient id="ringGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#f0d070" stop-opacity=".9"/>
+          <stop offset="100%" stop-color="#c9a84c" stop-opacity=".4"/>
+        </radialGradient>
+      </defs>
+      <circle cx="110" cy="110" r="106" stroke="url(#ringGrad)" stroke-width="1" stroke-dasharray="6 5" opacity=".8"/>
+      <circle cx="110" cy="110" r="90" stroke="#b5291a" stroke-width=".6" opacity=".35"/>
+      <circle cx="110" cy="110" r="74" stroke="#1dd4e8" stroke-width=".4" stroke-dasharray="3 6" opacity=".25"/>
+      <!-- 8 Trigrams at cardinal/intercardinal positions -->
+      <text font-size="17" fill="#f0d070" font-family="serif" opacity=".9">
+        <tspan x="102" y="12">☰</tspan>
+        <tspan x="174" y="44">☱</tspan>
+        <tspan x="202" y="116">☲</tspan>
+        <tspan x="174" y="186">☳</tspan>
+        <tspan x="102" y="218">☴</tspan>
+        <tspan x="30" y="186">☵</tspan>
+        <tspan x="6" y="116">☶</tspan>
+        <tspan x="30" y="44">☷</tspan>
       </text>
     </svg>
-    <svg class="e-inner" viewBox="0 0 150 150">
-      <circle cx="75" cy="75" r="73" stroke="#c9a84c" stroke-width=".5" fill="none"/>
-      <path d="M75,2 A73,73 0 0,1 75,148 A36.5,36.5 0 0,1 75,75 A36.5,36.5 0 0,0 75,2 Z" fill="#b5291a" opacity=".65"/>
-      <path d="M75,2 A73,73 0 0,0 75,148 A36.5,36.5 0 0,0 75,75 A36.5,36.5 0 0,1 75,2 Z" fill="#1a0408" opacity=".85"/>
-      <circle cx="75" cy="38.5" r="13" fill="#b5291a" opacity=".75"/>
-      <circle cx="75" cy="111.5" r="13" fill="#1a0408"/>
-      <circle cx="75" cy="38.5" r="4.5" fill="#1a0408"/>
-      <circle cx="75" cy="111.5" r="4.5" fill="#b5291a"/>
+    <!-- Middle ring: spinning reverse with teal accents -->
+    <svg class="e-mid" viewBox="0 0 160 160">
+      <defs>
+        <linearGradient id="midGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#1dd4e8" stop-opacity=".5"/>
+          <stop offset="50%" stop-color="#c9a84c" stop-opacity=".3"/>
+          <stop offset="100%" stop-color="#7c5de8" stop-opacity=".4"/>
+        </linearGradient>
+      </defs>
+      <circle cx="80" cy="80" r="77" stroke="url(#midGrad)" stroke-width="1" stroke-dasharray="2 8" fill="none"/>
+      <circle cx="80" cy="80" r="62" stroke="#c9a84c" stroke-width=".5" fill="none" opacity=".4"/>
     </svg>
+    <!-- Inner: fixed proper Taiji / Yin-Yang -->
+    <svg class="e-inner" viewBox="0 0 120 120">
+      <defs>
+        <radialGradient id="yangGrad" cx="50%" cy="25%" r="40%">
+          <stop offset="0%" stop-color="#d4351f"/>
+          <stop offset="100%" stop-color="#8a1812"/>
+        </radialGradient>
+        <radialGradient id="yinGrad" cx="50%" cy="75%" r="40%">
+          <stop offset="0%" stop-color="#1a0205"/>
+          <stop offset="100%" stop-color="#0c0010"/>
+        </radialGradient>
+        <filter id="gf"><feGaussianBlur stdDeviation="1.5"/></filter>
+      </defs>
+      <!-- Glow ring -->
+      <circle cx="60" cy="60" r="56" fill="none" stroke="#c9a84c" stroke-width="1.2" opacity=".7"/>
+      <circle cx="60" cy="60" r="57" fill="none" stroke="#b5291a" stroke-width="3" opacity=".08" filter="url(#gf)"/>
+      <!-- Yang (upper, red) half via correct arc path -->
+      <path d="M60,4 A56,56 0 0,1 60,116 A28,28 0 0,1 60,60 A28,28 0 0,0 60,4 Z" fill="url(#yangGrad)"/>
+      <!-- Yin (lower, dark) half -->
+      <path d="M60,4 A56,56 0 0,0 60,116 A28,28 0 0,0 60,60 A28,28 0 0,1 60,4 Z" fill="url(#yinGrad)"/>
+      <!-- Small circles: yang dot in yin, yin dot in yang -->
+      <circle cx="60" cy="32" r="11" fill="url(#yangGrad)"/>
+      <circle cx="60" cy="88" r="11" fill="url(#yinGrad)"/>
+      <circle cx="60" cy="32" r="4.5" fill="#0c0010"/>
+      <circle cx="60" cy="88" r="4.5" fill="#d4351f" opacity=".9"/>
+      <!-- Outer decorative dots -->
+      <circle cx="60" cy="4" r="2" fill="#f0d070" opacity=".7"/>
+      <circle cx="60" cy="116" r="2" fill="#f0d070" opacity=".7"/>
+    </svg>
+    <!-- 3 orbiting energy dots -->
+    <div class="orbit-dot od1"></div>
+    <div class="orbit-dot od2"></div>
+    <div class="orbit-dot od3"></div>
+    <!-- Energy rings -->
+    <div class="energy-ring er1"></div>
+    <div class="energy-ring er2"></div>
   </div>
   <h1>隨緣堂</h1>
   <div class="hero-en">Suiyuan Tang · Master of Destiny</div>
@@ -672,8 +832,8 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;position:relative;z-
       <span class="stat-label">累計服務人次</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num" data-target="18">0</span>
-      <span class="stat-label">命理研究年資</span>
+      <span class="stat-num" data-target="10">0</span>
+      <span class="stat-label">成立年資（2016）</span>
     </div>
     <div class="stat-item">
       <span class="stat-num" data-target="96">0</span>
@@ -686,6 +846,32 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;position:relative;z-
   </div>
 </div>
 
+
+<!-- 品牌特色 -->
+<section style="max-width:1100px;padding-top:1rem;padding-bottom:0">
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.8rem;text-align:center">
+    <div class="reveal" style="background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);border-radius:var(--r12);padding:2rem 1.5rem">
+      <div style="font-size:2.8rem;margin-bottom:.8rem">🏛️</div>
+      <div style="font-family:'Ma Shan Zheng',cursive;font-size:1.35rem;color:var(--gold2);letter-spacing:.1em;margin-bottom:.6rem">成立於2016年</div>
+      <p style="font-size:.88rem;color:var(--dim);line-height:1.8">深耕命理服務逾十年，以誠信與專業贏得廣大客戶信賴</p>
+    </div>
+    <div class="reveal" style="background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);border-radius:var(--r12);padding:2rem 1.5rem">
+      <div style="font-size:2.8rem;margin-bottom:.8rem">🔬</div>
+      <div style="font-family:'Ma Shan Zheng',cursive;font-size:1.35rem;color:var(--gold2);letter-spacing:.1em;margin-bottom:.6rem">精準命理分析</div>
+      <p style="font-size:.88rem;color:var(--dim);line-height:1.8">結合八字、紫微、六爻等多種體系，多維交叉驗證，準確度更高</p>
+    </div>
+    <div class="reveal" style="background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);border-radius:var(--r12);padding:2rem 1.5rem">
+      <div style="font-size:2.8rem;margin-bottom:.8rem">🤝</div>
+      <div style="font-family:'Ma Shan Zheng',cursive;font-size:1.35rem;color:var(--gold2);letter-spacing:.1em;margin-bottom:.6rem">務實可行建議</div>
+      <p style="font-size:.88rem;color:var(--dim);line-height:1.8">不只論命，更給予實際可執行的趨吉避凶方案與人生規劃建議</p>
+    </div>
+    <div class="reveal" style="background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);border-radius:var(--r12);padding:2rem 1.5rem">
+      <div style="font-size:2.8rem;margin-bottom:.8rem">🔒</div>
+      <div style="font-family:'Ma Shan Zheng',cursive;font-size:1.35rem;color:var(--gold2);letter-spacing:.1em;margin-bottom:.6rem">嚴格保密原則</div>
+      <p style="font-size:.88rem;color:var(--dim);line-height:1.8">所有諮詢內容絕對保密，客戶個資嚴格保護，安心諮詢無顧慮</p>
+    </div>
+  </div>
+</section>
 <!-- DASHBOARD -->
 <section id="dashboard" class="section-bg" style="max-width:1000px">
   <div class="sec-head">
@@ -729,34 +915,6 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;position:relative;z-
   </div>
 </section>
 
-<!-- TAROT -->
-<section id="tarot" class="section-bg" style="max-width:960px">
-  <div class="sec-head">
-    <span class="sec-eyebrow">Tarot Reading</span>
-    <h2>塔羅占卜</h2>
-    <p>三牌展開，洞見過去・現在・未來的命運軌跡</p>
-    <div class="sec-divider"><span>🔮</span></div>
-  </div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:1.2rem;margin-bottom:3rem">
-    <input class="tarot-q" id="tarotQ" type="text" placeholder="請輸入您的問題，例如：感情、事業、財運……">
-    <button class="btn-red" onclick="drawTarot()">✦ 洗牌・抽取牌陣 ✦</button>
-  </div>
-  <div style="display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;min-height:280px" id="tarotSpread">
-    <div style="display:flex;flex-direction:column;align-items:center;gap:.8rem">
-      <div style="font-size:.85rem;color:var(--muted);letter-spacing:.15em">過去</div>
-      <div class="t-card" id="tc0" onclick="flipCard(0)"><div class="t-card-inner"><div class="t-back"></div><div class="t-face"><div class="t-symbol">？</div><div class="t-name">點擊翻牌</div><div class="t-meaning"></div></div></div></div>
-    </div>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:.8rem">
-      <div style="font-size:.85rem;color:var(--muted);letter-spacing:.15em">現在</div>
-      <div class="t-card" id="tc1" onclick="flipCard(1)"><div class="t-card-inner"><div class="t-back"></div><div class="t-face"><div class="t-symbol">？</div><div class="t-name">點擊翻牌</div><div class="t-meaning"></div></div></div></div>
-    </div>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:.8rem">
-      <div style="font-size:.85rem;color:var(--muted);letter-spacing:.15em">未來</div>
-      <div class="t-card" id="tc2" onclick="flipCard(2)"><div class="t-card-inner"><div class="t-back"></div><div class="t-face"><div class="t-symbol">？</div><div class="t-name">點擊翻牌</div><div class="t-meaning"></div></div></div></div>
-    </div>
-  </div>
-  <div class="tarot-result" id="tarotResult"><h3>牌陣解讀</h3><p id="tarotInterpret"></p></div>
-</section>
 
 <!-- 六爻 -->
 <section id="liuyao" class="section-bg2" style="max-width:720px">
@@ -884,35 +1042,6 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;position:relative;z-
   </div>
 </section>
 
-<!-- 師父介紹 -->
-<section id="master" class="section-bg2">
-  <div class="sec-head">
-    <span class="sec-eyebrow">About Master</span>
-    <h2>師父介紹</h2>
-    <p>深厚學養，真誠服務，以命理智慧助您人生決策</p>
-    <div class="sec-divider"><span>☯</span></div>
-  </div>
-  <div class="master-wrap reveal">
-    <div class="master-photo" style="animation:float 5s ease infinite">
-      <div style="text-align:center">
-        <div style="font-size:5rem">🧙</div>
-        <div style="font-family:'Ma Shan Zheng',cursive;font-size:1.5rem;color:var(--gold);margin-top:.5rem;letter-spacing:.1em">隨緣堂主</div>
-      </div>
-    </div>
-    <div class="master-info">
-      <div class="master-name">道長 玄一</div>
-      <div class="master-title">隨緣堂創辦人 · 命理研究逾十八年</div>
-      <p class="master-bio">自幼對命理玄學深感興趣，師承多位命理名師，潛心研究八字、紫微斗數、風水堪輿逾十八年。深信命理非宿命論，而是透過了解自身格局，主動趨吉避凶、把握機遇。服務逾三千名客戶，以誠信、精準、務實的諮詢風格，深受各界信賴。</p>
-      <div class="credential-list">
-        <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">中華命理研究學會 資深會員</div></div>
-        <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">師承台灣八字名師，系統學習四柱推命精髓</div></div>
-        <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">紫微斗數進階師資，曾開設課程培訓逾百名學員</div></div>
-        <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">陽宅風水勘察逾五百件，涵蓋住宅、辦公室、廠房</div></div>
-        <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">曾接受多家媒體採訪，分享命理知識普及正確觀念</div></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- 客戶見證 -->
 <section id="testimonials" class="section-bg">
@@ -980,24 +1109,42 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;position:relative;z-
   </div>
 </section>
 
-<!-- 媒體報導 -->
-<section class="section-bg2" style="max-width:900px">
+
+<!-- 合作認證 -->
+<section style="max-width:1000px;padding-top:1rem">
   <div class="sec-head">
-    <span class="sec-eyebrow">Media Coverage</span>
-    <h2>媒體報導</h2>
-    <p>受到各大媒體與機構的關注與報導</p>
+    <span class="sec-eyebrow">Certifications &amp; Partners</span>
+    <h2>認證資格與合作機構</h2>
+    <p>專業背書，值得信賴</p>
     <div class="sec-divider"><span>✦</span></div>
   </div>
-  <div class="media-grid reveal">
-    <div class="media-badge">📰 聯合報・生活專題</div>
-    <div class="media-badge">📺 東森新聞・玄學特輯</div>
-    <div class="media-badge">🎙 廣播電台・命理節目</div>
-    <div class="media-badge">💻 商業周刊・命理觀點</div>
-    <div class="media-badge">📖 玄學月刊・專欄作家</div>
-    <div class="media-badge">🎓 社區大學・命理講師</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem" class="reveal">
+    <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--r12);padding:1.5rem 2rem;display:flex;align-items:center;gap:1.2rem">
+      <div style="font-size:2.2rem;flex-shrink:0">🎓</div>
+      <div><div style="font-size:1rem;color:var(--gold);font-weight:600;margin-bottom:.3rem">中華命理研究學會</div><div style="font-size:.82rem;color:var(--dim)">資深會員・2017年起</div></div>
+    </div>
+    <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--r12);padding:1.5rem 2rem;display:flex;align-items:center;gap:1.2rem">
+      <div style="font-size:2.2rem;flex-shrink:0">📜</div>
+      <div><div style="font-size:1rem;color:var(--gold);font-weight:600;margin-bottom:.3rem">易學研究院 認證師資</div><div style="font-size:.82rem;color:var(--dim)">紫微斗數進階教師認證</div></div>
+    </div>
+    <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--r12);padding:1.5rem 2rem;display:flex;align-items:center;gap:1.2rem">
+      <div style="font-size:2.2rem;flex-shrink:0">🏫</div>
+      <div><div style="font-size:1rem;color:var(--gold);font-weight:600;margin-bottom:.3rem">社區大學 合作講師</div><div style="font-size:.82rem;color:var(--dim)">命理推廣教育課程</div></div>
+    </div>
+    <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--r12);padding:1.5rem 2rem;display:flex;align-items:center;gap:1.2rem">
+      <div style="font-size:2.2rem;flex-shrink:0">✍️</div>
+      <div><div style="font-size:1rem;color:var(--gold);font-weight:600;margin-bottom:.3rem">玄學月刊 專欄作家</div><div style="font-size:.82rem;color:var(--dim)">定期發表命理研究文章</div></div>
+    </div>
+    <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--r12);padding:1.5rem 2rem;display:flex;align-items:center;gap:1.2rem">
+      <div style="font-size:2.2rem;flex-shrink:0">🏢</div>
+      <div><div style="font-size:1rem;color:var(--gold);font-weight:600;margin-bottom:.3rem">企業命理顧問</div><div style="font-size:.82rem;color:var(--dim)">提供公司開業、人事決策諮詢</div></div>
+    </div>
+    <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--r12);padding:1.5rem 2rem;display:flex;align-items:center;gap:1.2rem">
+      <div style="font-size:2.2rem;flex-shrink:0">🌐</div>
+      <div><div style="font-size:1rem;color:var(--gold);font-weight:600;margin-bottom:.3rem">海外華人服務</div><div style="font-size:.82rem;color:var(--dim)">提供線上視訊諮詢，服務全球用戶</div></div>
+    </div>
   </div>
 </section>
-
 <!-- 課程 -->
 <section id="courses" class="section-bg">
   <div class="sec-head">
@@ -1056,7 +1203,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;position:relative;z-
   <div class="footer-inner">
     <div class="footer-brand">
       <span class="f-logo">隨緣堂</span>
-      <p>道法自然，天人合一<br>以古老智慧，探索命運奧秘<br>© 2024 隨緣堂 Suiyuan Tang</p>
+      <p>道法自然，天人合一<br>以古老智慧，探索命運奧秘<br>© 2016–2026 隨緣堂 Suiyuan Tang</p>
     </div>
     <div class="footer-col">
       <h4>服務項目</h4>
@@ -1071,7 +1218,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;position:relative;z-
     <div class="footer-col">
       <h4>占卜工具</h4>
       <ul>
-        <li><a href="#" onclick="scrollToSec('tarot');return false">塔羅占卜</a></li>
+        
         <li><a href="#" onclick="scrollToSec('liuyao');return false">六爻占卜</a></li>
         <li><a href="#" onclick="scrollToSec('meihua');return false">梅花易數</a></li>
         <li><a href="#" onclick="scrollToSec('nameanalysis');return false">姓名學</a></li>
@@ -1184,27 +1331,91 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;position:relative;z-
 <script>
 /* ══ CANVAS BG ══ */
 (function(){
-  const c=document.getElementById('bg'),ctx=c.getContext('2d');
-  let W,H,pts=[],orbs=[];
-  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;init()}
+  const cv=document.getElementById('bg'),ctx=cv.getContext('2d');
+  let W,H,pts=[],orbs=[],shoots=[];
+  // Particle color palette — gold, jade, indigo, teal, red
+  const PCOLS=[
+    [201,168,76],[29,212,148],[124,93,232],[29,212,232],[181,41,26],[240,208,112]
+  ];
+  // Orb colors
+  const OCOLS=[
+    [181,41,26],[124,93,232],[13,143,160],[26,155,108],[201,168,76]
+  ];
+  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;init()}
   function init(){
-    pts=[];const n=Math.floor(W*H/6500);
-    for(let i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.2,tw:Math.random()*Math.PI*2,sp:.008+Math.random()*.018});
-    orbs=[];for(let i=0;i<3;i++)orbs.push({x:Math.random()*W,y:Math.random()*H,r:80+Math.random()*120,vx:(.5-Math.random())*.3,vy:(.5-Math.random())*.3,op:.04+Math.random()*.04});
+    pts=[];
+    const n=Math.floor(W*H/4800);
+    for(let i=0;i<n;i++){
+      const col=PCOLS[Math.floor(Math.random()*PCOLS.length)];
+      pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.2,tw:Math.random()*Math.PI*2,sp:.006+Math.random()*.02,col,drift:(.5-Math.random())*.15});
+    }
+    orbs=[];
+    for(let i=0;i<6;i++){
+      const col=OCOLS[i%OCOLS.length];
+      orbs.push({x:Math.random()*W,y:Math.random()*H,r:60+Math.random()*140,vx:(.5-Math.random())*.25,vy:(.5-Math.random())*.25,op:.025+Math.random()*.045,col});
+    }
   }
+  function spawnShoot(){
+    shoots.push({x:Math.random()*W*.6+W*.2,y:Math.random()*H*.3,len:80+Math.random()*120,alpha:1,sp:5+Math.random()*6,angle:Math.PI*.75+(.5-Math.random())*.3});
+  }
+  setInterval(spawnShoot,2800);
+  let t=0;
   function draw(){
+    t+=.004;
     ctx.clearRect(0,0,W,H);
-    const g=ctx.createRadialGradient(W/2,H*.4,0,W/2,H*.4,Math.max(W,H)*.9);
-    g.addColorStop(0,'rgba(28,4,12,.55)');g.addColorStop(.5,'rgba(15,2,8,.7)');g.addColorStop(1,'rgba(5,0,9,.95)');
+    // Deep space bg gradient — shifts slowly
+    const g=ctx.createRadialGradient(W*.5+Math.sin(t)*W*.05,H*.4+Math.cos(t*.7)*H*.06,0,W*.5,H*.5,Math.max(W,H));
+    g.addColorStop(0,'rgba(18,2,10,.65)');
+    g.addColorStop(.3,'rgba(8,0,14,.75)');
+    g.addColorStop(.7,'rgba(4,2,18,.85)');
+    g.addColorStop(1,'rgba(4,0,13,.98)');
     ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    // Aurora bands
+    for(let i=0;i<3;i++){
+      const au=ctx.createLinearGradient(0,H*(0.1+i*.28)+Math.sin(t+i)*H*.04,W,H*(0.3+i*.28));
+      const hues=[[181,41,26,.03],[76,43,191,.025],[13,143,160,.02]];
+      au.addColorStop(0,'transparent');
+      au.addColorStop(.4,`rgba(${hues[i][0]},${hues[i][1]},${hues[i][2]},${hues[i][3]})`);
+      au.addColorStop(1,'transparent');
+      ctx.fillStyle=au;ctx.fillRect(0,H*(0.05+i*.28),W,H*.25);
+    }
+    // Drifting orbs
     orbs.forEach(o=>{
       o.x+=o.vx;o.y+=o.vy;
-      if(o.x<0||o.x>W)o.vx*=-1;if(o.y<0||o.y>H)o.vy*=-1;
+      if(o.x<-o.r)o.x=W+o.r;else if(o.x>W+o.r)o.x=-o.r;
+      if(o.y<-o.r)o.y=H+o.r;else if(o.y>H+o.r)o.y=-o.r;
       const og=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r);
-      og.addColorStop(0,`rgba(181,41,26,${o.op})`);og.addColorStop(1,'transparent');
+      og.addColorStop(0,`rgba(${o.col[0]},${o.col[1]},${o.col[2]},${o.op})`);
+      og.addColorStop(.6,`rgba(${o.col[0]},${o.col[1]},${o.col[2]},${o.op*.3})`);
+      og.addColorStop(1,'transparent');
       ctx.fillStyle=og;ctx.fillRect(o.x-o.r,o.y-o.r,o.r*2,o.r*2);
     });
-    pts.forEach(p=>{p.tw+=p.sp;const a=.12+Math.abs(Math.sin(p.tw))*.45;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${a})`;ctx.fill()});
+    // Twinkling stars (multi-color)
+    pts.forEach(p=>{
+      p.tw+=p.sp;p.x+=p.drift;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+      const a=.08+Math.abs(Math.sin(p.tw))*.55;
+      const sz=p.r*(0.7+Math.abs(Math.sin(p.tw))*.6);
+      ctx.beginPath();ctx.arc(p.x,p.y,sz,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${a})`;ctx.fill();
+      // Add glow to brighter stars
+      if(a>0.5){
+        ctx.beginPath();ctx.arc(p.x,p.y,sz*2.5,0,Math.PI*2);
+        ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${a*.08})`;ctx.fill();
+      }
+    });
+    // Shooting stars
+    shoots.forEach((s,i)=>{
+      ctx.save();ctx.globalAlpha=s.alpha;
+      ctx.strokeStyle=`rgba(240,208,112,${s.alpha})`;ctx.lineWidth=1.2;
+      ctx.shadowColor='rgba(240,208,112,.8)';ctx.shadowBlur=6;
+      ctx.beginPath();
+      ctx.moveTo(s.x,s.y);
+      ctx.lineTo(s.x+Math.cos(s.angle)*s.len,s.y+Math.sin(s.angle)*s.len);
+      ctx.stroke();ctx.restore();
+      s.x+=Math.cos(s.angle)*s.sp;s.y+=Math.sin(s.angle)*s.sp;s.alpha-=.025;
+    });
+    shoots=shoots.filter(s=>s.alpha>0);
     requestAnimationFrame(draw);
   }
   window.addEventListener('resize',resize);resize();draw();
@@ -1324,57 +1535,6 @@ const HEX=[
   sOracle();
 })();
 
-/* ══ TAROT ══ */
-const DECK=[
-  {s:'☀️',n:'太陽',m:'光明、成功、活力與幸福'},{s:'🌙',n:'月亮',m:'直覺、夢境、隱藏的真相'},
-  {s:'⭐',n:'星星',m:'希望、靈感、更新與療癒'},{s:'⚡',n:'塔',m:'突變、覺醒、打破舊有模式'},
-  {s:'⚖️',n:'正義',m:'公平、真理、因果與平衡'},{s:'🔮',n:'命運之輪',m:'命運轉折、機遇、循環法則'},
-  {s:'💪',n:'力量',m:'內在力量、勇氣、克服恐懼'},{s:'🧙',n:'魔法師',m:'意志力、技巧、主動創造'},
-  {s:'👁️',n:'女祭司',m:'直覺、神秘知識、內在智慧'},{s:'🌍',n:'世界',m:'完成、整合、成就與旅行'},
-  {s:'🤝',n:'戀人',m:'選擇、愛情、價值觀與關係'},{s:'🏰',n:'皇帝',m:'權威、結構、穩定與秩序'},
-  {s:'👑',n:'皇后',m:'豐盛、創造力、母性滋養'},{s:'🎭',n:'愚者',m:'新開始、自由、冒險精神'},
-  {s:'🕊️',n:'審判',m:'重生、覺醒、回答內心召喚'},{s:'✝️',n:'教皇',m:'傳統、精神指引、道德準則'},
-  {s:'🌿',n:'節制',m:'平衡、節制、耐心與調和'},{s:'💀',n:'死神',m:'轉化、結束與新生、蛻變'},
-  {s:'😈',n:'惡魔',m:'束縛、物質誘惑、執念'},{s:'🌛',n:'隱士',m:'內省、獨處、尋求智慧'},
-  {s:'🎡',n:'戰車',m:'勝利、意志、掌控前進'},{s:'🗡️',n:'吊人',m:'犧牲、等待、換個視角'},
-];
-const INTERPS=[
-  ['過去奠定了堅實基礎，積累的力量正等待釋放的時機。','此刻是關鍵轉捩點，內心的直覺比外在的建議更值得信賴。','未來的光明清晰可見，只要堅定信念，好運即將降臨。'],
-  ['過去的選擇如種子埋入土壤，正在此刻開花結果。','現在需要放下過去的包袱，以輕盈的心態面對當下的挑戰。','未來隱藏著驚喜的轉機，保持開放的心態方能把握。'],
-  ['過去的經歷雖有坎坷，卻已成為您最珍貴的人生資糧。','現在各方力量需要平衡，不可偏廢，以和諧為主軸前行。','未來充滿無限可能，您的每一個行動都將直接影響結果。'],
-];
-let drawnCards=null;
-function drawTarot(){
-  const deck=[...DECK];drawnCards=[];
-  for(let i=0;i<3;i++){const idx=Math.floor(Math.random()*deck.length);drawnCards.push({...deck.splice(idx,1)[0],rev:Math.random()<.25})}
-  [0,1,2].forEach(i=>{
-    const card=document.getElementById('tc'+i);
-    card.classList.remove('flipped');card.classList.add('shake');setTimeout(()=>card.classList.remove('shake'),500);
-    const f=card.querySelector('.t-face');f.querySelector('.t-symbol').textContent='？';f.querySelector('.t-name').textContent='點擊翻牌';f.querySelector('.t-meaning').textContent='';
-  });
-  document.getElementById('tarotResult').classList.remove('show');
-  sDraw();showToast('牌已洗好，請點擊翻牌');
-}
-function flipCard(i){
-  if(!drawnCards)return;
-  const card=document.getElementById('tc'+i);if(card.classList.contains('flipped'))return;
-  card.classList.add('flipped');sFlip();
-  const f=card.querySelector('.t-face'),cd=drawnCards[i];
-  f.querySelector('.t-symbol').textContent=cd.s;
-  f.querySelector('.t-name').textContent=cd.n+(cd.rev?' (逆位)':'');
-  f.querySelector('.t-meaning').textContent=cd.rev?'逆位：'+cd.m+'（能量受阻）':cd.m;
-  if(document.querySelectorAll('.t-card.flipped').length===3){
-    const q=document.getElementById('tarotQ').value||'您的問題';
-    const interp=INTERPS[Math.floor(Math.random()*INTERPS.length)];
-    document.getElementById('tarotInterpret').innerHTML=
-      `關於「<strong style="color:var(--gold)">${q}</strong>」的牌陣解讀：<br><br>`+
-      `<strong style="color:var(--gold2)">過去【${drawnCards[0].n}】</strong>：${interp[0]}<br><br>`+
-      `<strong style="color:var(--gold2)">現在【${drawnCards[1].n}】</strong>：${interp[1]}<br><br>`+
-      `<strong style="color:var(--gold2)">未來【${drawnCards[2].n}】</strong>：${interp[2]}`;
-    document.getElementById('tarotResult').classList.add('show');sSuccess();
-    document.getElementById('tarotResult').scrollIntoView({behavior:'smooth',block:'nearest'});
-  }
-}
 
 /* ══ SIX YAO ══ */
 const LY=[
@@ -1598,10 +1758,11 @@ const FAQS=[
   {q:'諮詢前需要準備什麼資料？',a:'您只需準備出生年、月、日、時即可。若有特定問題（感情、事業、健康等），也請事先想好，有助於提升諮詢效率。'},
   {q:'命理諮詢與算命有什麼不同？',a:'命理諮詢是根據出生資訊，系統性地分析格局、後天運勢，並提供具體建議；一般算命可能偏向單純預測，缺乏分析依據。'},
   {q:'線上排盤的結果是否準確？',a:'線上排盤提供基礎推算，可作為參考。完整準確的命盤解析需由命理師綜合多方資訊進行專業詮釋，建議搭配完整諮詢。'},
-  {q:'塔羅占卜與命理有什麼關聯？',a:'塔羅以牌卡象徵意義引導直覺，適合針對特定問題的當下解讀；命理則根據生辰推算長遠格局。兩者相輔相成，提供更全面視角。'},
+  {q:'隨緣堂成立多久了？師父資歷如何？',a:'隨緣堂成立於2016年，由玄一道長主持，師承多位命理名師，具備中華命理研究學會資深會員資格及紫微斗數認證師資，累積十年以上實戰諮詢經驗，服務超過3800位客戶。'},
   {q:'諮詢後可以再次詢問嗎？',a:'每次服務包含一份完整報告及一次後續回覆。若需進一步諮詢，可依需求另行安排。'},
   {q:'風水勘察需要到現場嗎？',a:'原則上需要親赴現場，以獲得最準確的氣場資訊。若距離較遠，可提供詳細平面圖及照片，進行遠端評估服務。'},
   {q:'如何確認預約是否成功？',a:'送出申請後，我們將於24小時內以電子郵件回覆確認。請確保填寫正確的聯絡信箱。也可使用線上預約系統，完成後收到確認郵件。'},
+  {q:'可以提供企業或團體命理顧問服務嗎？',a:'可以。隨緣堂自2016年起即提供企業開業擇日、辦公室風水勘察、人事任用命格分析等企業命理顧問服務，歡迎來信jackkok1388@gmail.com洽詢客製化方案。'},
 ];
 (function(){
   const list=document.getElementById('faqList');if(!list)return;
@@ -1664,17 +1825,23 @@ function calcZeri(e){
 
 /* ══ ARTICLES ══ */
 const ARTS=[
-  {e:'🌿',tag:'八字入門',title:'八字命盤入門：天干地支與五行的秘密',text:'八字命理是中國傳統命理學的核心，透過出生年月日時推算出的四柱八字，如同一個人的命運地圖……'},
-  {e:'⭐',tag:'紫微斗數',title:'紫微斗數：以星曜解讀命運十二宮',text:'紫微斗數以北斗星系為基礎，將人生劃分為十二宮位，每個宮位對應生活的不同面向……'},
-  {e:'🏯',tag:'風水',title:'家居風水入門：五大佈局改善居家氣場',text:'風水學認為居家環境的氣場流動直接影響運勢與身心狀態，透過簡單佈局調整即可改善……'},
-  {e:'🔮',tag:'塔羅',title:'塔羅占卜入門：大阿爾克那二十二張牌',text:'塔羅牌起源於15世紀歐洲，大阿爾克那的二十二張主牌代表著人生旅程的各個階段……'},
-  {e:'🌛',tag:'數字靈數',title:'生命靈數：數字背後隱藏的命運密碼',text:'生命靈數學認為每個人的出生日期蘊含著特定的數字振動頻率，這些頻率與宇宙能量相呼應……'},
-  {e:'🌍',tag:'流年運勢',title:'如何看懂自己的流年運勢',text:'流年是指特定年份對個人命盤的影響，透過流年大運分析，可以掌握人生各階段的起伏規律……'},
-  {e:'☯️',tag:'六爻',title:'六爻占卜：三枚銅錢問天地玄機',text:'六爻占卜源自易經，以三枚銅錢搖出六個爻位，組成一卦，是古代智者洞察時局的工具……'},
-  {e:'🌸',tag:'梅花易數',title:'梅花易數：以時間起卦的玄妙術數',text:'梅花易數由北宋邵雍所創，以時間萬物皆有象的哲學為基礎，是最便捷靈活的易卦預測方法……'},
-  {e:'✍️',tag:'姓名學',title:'姓名學五格剖析：天地人才外決定你的命運',text:'姓名學認為姓名的筆劃數蘊含五行能量，透過天地人才外五格的計算，可以了解名字對運勢的影響……'},
+  {e:'🌿',tag:'八字入門',title:'八字命盤入門：天干地支與五行的秘密',text:'八字命理是中國傳統命理學的核心，透過出生年月日時推算出的四柱八字，如同一個人的命運地圖，精準揭示先天格局與後天運勢的起伏脈絡。'},
+  {e:'🏮',tag:'八字入門',title:'十神解析：比肩、食神、正財與七殺的含義',text:'八字十神是命盤分析的核心工具，從比肩代表的平輩競爭，到七殺象徵的挑戰壓力，每一位十神都揭示人際關係與命運走向的深層密碼。'},
+  {e:'⭐',tag:'紫微斗數',title:'紫微斗數：以星曜解讀命運十二宮',text:'紫微斗數以北斗星系為基礎，將人生劃分為十二宮位，每個宮位對應生活的不同面向，透過星曜組合解讀個人的先天命格與後天際遇。'},
+  {e:'🌟',tag:'紫微斗數',title:'紫微、天機、太陽、武曲：四大主星解析',text:'紫微星代表領導格局，天機主智慧謀略，太陽象徵光明積極，武曲則顯示財富行動力——四大主星入主命宮，決定一生的基本性格與命運走向。'},
+  {e:'🏯',tag:'風水',title:'家居風水入門：五大佈局改善居家氣場',text:'風水學認為居家環境的氣場流動直接影響運勢與身心狀態，透過玄關、客廳、臥室、廚房、書房五大區域的調整，即可有效改善整體氣場。'},
+  {e:'🧭',tag:'風水',title:'辦公室風水：提升事業運的座位與佈局秘訣',text:'辦公室的座位方向、桌面擺設、入口位置都與事業運息息相關。本文詳解如何運用風水原理，為職場打造有利晉升與財富累積的能量環境。'},
+  {e:'🌛',tag:'數字靈數',title:'生命靈數：數字背後隱藏的命運密碼',text:'生命靈數學認為每個人的出生日期蘊含著特定的數字振動頻率，這些頻率與宇宙能量相呼應，透過計算可揭示個人天賦、挑戰與人生使命。'},
+  {e:'🌍',tag:'流年運勢',title:'如何看懂自己的流年運勢',text:'流年是指特定年份對個人命盤的影響，透過流年大運分析，可以掌握人生各階段的起伏規律，提前規劃以趨吉避凶、把握關鍵時機。'},
+  {e:'📅',tag:'流年運勢',title:'2025年五行運勢全解析：乙巳蛇年吉凶佈局',text:'乙巳年以木蛇為象，五行木氣當旺，各生肖命格受蛇年天干地支影響各異。本文詳解2025年整體格局與十二生肖個別流年重點提醒。'},
+  {e:'☯️',tag:'六爻',title:'六爻占卜：三枚銅錢問天地玄機',text:'六爻占卜源自易經，以三枚銅錢搖出六個爻位，組成本卦與變卦，是古代智者洞察時局的工具，至今仍廣泛應用於事業、感情、財運預測。'},
+  {e:'🌸',tag:'梅花易數',title:'梅花易數：以時間起卦的玄妙術數',text:'梅花易數由北宋邵雍所創，以時間萬物皆有象的哲學為基礎，利用年月日時或見聞所得起卦，是最便捷靈活的易卦預測方法之一。'},
+  {e:'✍️',tag:'姓名學',title:'姓名學五格剖析：天地人才外決定你的命運',text:'姓名學認為姓名的筆劃數蘊含五行能量，透過天格、地格、人格、才格、外格五大格數的計算，可以了解名字對健康、財運、人際的深遠影響。'},
+  {e:'💎',tag:'姓名學',title:'幫孩子取個好名字：嬰兒命名的三大原則',text:'為新生兒命名是人生大事。本文從八字五行缺補、姓名五格配置、音韻吉凶三大角度，提供系統化的命名思路，助父母為孩子奠定好命基礎。'},
+  {e:'🌺',tag:'八字入門',title:'大運解析：十年大運如何影響你的命運走向',text:'大運是八字命理中最重要的後天運勢指標，每十年一換，決定該時期的整體走向與重大事件的觸發。了解大運，即能掌握人生各階段的佈局關鍵。'},
+  {e:'🏛️',tag:'風水',title:'陽宅格局：大門、客廳、主臥的風水禁忌與化解',text:'陽宅風水以氣的流動為核心，大門為納氣之口，客廳聚氣定財，主臥關係健康婚姻。本文整理最常見的格局缺陷與簡易化解方法，居家必備知識。'},
 ];
-const ART_TAGS=['全部','八字入門','紫微斗數','風水','塔羅','數字靈數','流年運勢','六爻','梅花易數','姓名學'];
+const ART_TAGS=['全部','八字入門','紫微斗數','風水','數字靈數','流年運勢','六爻','梅花易數','姓名學'];
 let artFilter='全部';
 function renderArticles(){
   const g=document.getElementById('articlesGrid'),filters=document.getElementById('artFilters');
