@@ -503,9 +503,18 @@ textarea.c-input{resize:vertical;min-height:120px}
 .wx-chip{font-size:.82rem;padding:.28rem .8rem;border-radius:20px;letter-spacing:.05em}
 .bazi-summary{color:var(--muted);font-size:.95rem;line-height:2;border-left:3px solid var(--gold3);padding-left:1rem}
 .zi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
-.zi-palace{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:var(--r8);padding:.8rem .5rem;text-align:center}
-.zi-pname{color:var(--gold);font-size:.88rem;letter-spacing:.06em;margin-bottom:.3rem}
-.zi-stars{color:var(--muted);font-size:.75rem;line-height:1.6}
+.zi-palace{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:var(--r8);padding:.7rem .5rem;text-align:center;cursor:pointer;transition:border-color .2s}
+.zi-palace:hover{border-color:var(--gold)}
+.ming-palace{border-color:var(--gold2)!important;background:rgba(201,168,76,.08)!important}
+.zi-pname{color:var(--gold);font-size:.85rem;letter-spacing:.06em;margin-bottom:.3rem;display:flex;align-items:center;justify-content:center;gap:.25rem;flex-wrap:wrap}
+.zp-dz{color:var(--muted);font-size:.72rem}
+.zp-badge{font-size:.65rem;padding:.1rem .3rem;border-radius:3px;font-weight:700}
+.zp-badge.ming{background:var(--gold2);color:#111}
+.zp-badge.shen{background:var(--indigo2);color:#fff}
+.zi-stars{font-size:.75rem;line-height:1.7}
+.zp-star{display:inline-block;margin:.05rem .1rem}
+.main-star{color:var(--gold2)}
+.aux-star{color:var(--muted);font-size:.7rem}
 .zeri-item{border-bottom:1px solid rgba(201,168,76,.12);padding:.9rem 0;display:flex;gap:1rem}
 .zeri-date{color:var(--gold);min-width:110px;font-size:.95rem}
 .zeri-info{color:var(--text);font-size:.88rem;line-height:1.7}
@@ -1290,9 +1299,11 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;position:relative;z-
     <form class="p-form" onsubmit="calcZiwei(event)">
       <div class="p-row"><label>姓名</label><input type="text" id="zwName" placeholder="請輸入姓名"></div>
       <div class="p-row"><label>性別</label><select id="zwGender"><option value="m">男</option><option value="f">女</option></select></div>
-      <div class="p-row"><label>農曆月份</label><select id="zwMonth"><option value="1">正月</option><option value="2">二月</option><option value="3">三月</option><option value="4">四月</option><option value="5">五月</option><option value="6">六月</option><option value="7">七月</option><option value="8">八月</option><option value="9">九月</option><option value="10">十月</option><option value="11">十一月</option><option value="12">十二月</option></select></div>
-      <div class="p-row"><label>農曆日</label><input type="number" id="zwDay" min="1" max="30" placeholder="例：15"></div>
-      <div class="p-row"><label>出生時</label><select id="zwHour"><option value="0">子時</option><option value="1">丑時</option><option value="2">寅時</option><option value="3">卯時</option><option value="4">辰時</option><option value="5">巳時</option><option value="6">午時</option><option value="7">未時</option><option value="8">申時</option><option value="9">酉時</option><option value="10">戌時</option><option value="11">亥時</option></select></div>
+      <div class="p-row"><label>曆法</label><select id="zwCal" onchange="toggleZwCalLabel()"><option value="lunar">農曆（陰曆）</option><option value="solar">國曆（陽曆）</option></select></div>
+      <div class="p-row"><label>出生年份</label><input type="number" id="zwYear" min="1920" max="2010" placeholder="例：1985"></div>
+      <div class="p-row"><label id="zwMonthLabel">農曆月份</label><select id="zwMonth"><option value="1">正月 / 1月</option><option value="2">二月 / 2月</option><option value="3">三月 / 3月</option><option value="4">四月 / 4月</option><option value="5">五月 / 5月</option><option value="6">六月 / 6月</option><option value="7">七月 / 7月</option><option value="8">八月 / 8月</option><option value="9">九月 / 9月</option><option value="10">十月 / 10月</option><option value="11">十一月 / 11月</option><option value="12">十二月 / 12月</option></select></div>
+      <div class="p-row"><label id="zwDayLabel">農曆日</label><input type="number" id="zwDay" min="1" max="31" placeholder="例：15"></div>
+      <div class="p-row"><label>出生時</label><select id="zwHour"><option value="0">子時 (23-01時)</option><option value="1">丑時 (01-03時)</option><option value="2">寅時 (03-05時)</option><option value="3">卯時 (05-07時)</option><option value="4">辰時 (07-09時)</option><option value="5">巳時 (09-11時)</option><option value="6">午時 (11-13時)</option><option value="7">未時 (13-15時)</option><option value="8">申時 (15-17時)</option><option value="9">酉時 (17-19時)</option><option value="10">戌時 (19-21時)</option><option value="11">亥時 (21-23時)</option></select></div>
       <button type="submit" class="btn-red" style="padding:.9rem 2.4rem">✦ 排列紫微命盤 ✦</button>
     </form>
     <div id="ziweiResult" class="p-result">
@@ -1936,11 +1947,15 @@ function getMonthPillar(y,m,d){
   // 月支：以節氣為界，未過節取上個月支
   const termDay=SOLAR_TERM_APPROX[m-1];
   const adjM=d<termDay?m-1:m;
-  const realM=((adjM-1)+12)%12; // 0-11，寅月=0
-  const mDZ=(realM+2)%12; // 子=0，寅=2
-  // 月干：由年干推算，甲己年起丙寅，乙庚年起戊寅，丙辛起庚寅，丁壬起壬寅，戊癸起甲寅
-  const yTG=((y-4)%10+10)%10;
-  const mTGBase=[2,4,6,8,0][yTG%5]; // 寅月(第一月)之天干索引
+  // realM: 寅月=0起，卯月=1,...，丑月=11（修正：adjM對應農曆月支）
+  // 正確對應：Feb(adjM=2)=寅月=0, Mar(adjM=3)=卯月=1 ... Jan(adjM=1)=丑月=11
+  const realM=((adjM-2)+12)%12; // 修正後的寅月=0基準
+  const mDZ=adjM%12; // 子=0,丑=1,...亥=11；Jan→1=丑,Feb→2=寅,...Dec→0=子 ✓
+  // 月干：由「八字年」的年干決定（八字年以立春為界）
+  const lichunDay=SOLAR_TERM_APPROX[1]; // 立春約在2月4日
+  const bajYear=(m<2||(m===2&&d<lichunDay))?y-1:y; // 立春前算上一年
+  const yTG=((bajYear-4)%10+10)%10;
+  const mTGBase=[2,4,6,8,0][yTG%5]; // 甲己→丙，乙庚→戊，丙辛→庚，丁壬→壬，戊癸→甲
   const mTG=(mTGBase+realM)%10;
   return {tg:TG[mTG],dz:DZ[mDZ],el:TG5[mTG],el2:DZ5[mDZ],l:'月柱'};
 }
@@ -1955,12 +1970,16 @@ function getDayPillar(y,m,d){
   return {tg:TG[dayIdx%10],dz:DZ[dayIdx%12],el:TG5[dayIdx%10],el2:DZ5[dayIdx%12],l:'日柱'};
 }
 function getPillars(y,m,d,h){
-  const yIdx=((y-4)%60+60)%60,yTG=yIdx%10,yDZ=yIdx%12;
+  // 年柱：以立春為界（立春前算上一年）
+  const lichunDay=SOLAR_TERM_APPROX[1]; // 立春約在2月4日
+  const bajYear=(m<2||(m===2&&d<lichunDay))?y-1:y;
+  const yIdx=((bajYear-4)%60+60)%60,yTG=yIdx%10,yDZ=yIdx%12;
   const mp=getMonthPillar(y,m,d);
   const dp=getDayPillar(y,m,d);
+  // 時支：子時=0，每2小時一個時辰
   const hDZ=Math.floor(((h+1)%24)/2);
+  // 時干：由日干推算（甲己日起甲子，乙庚起丙子，丙辛起戊子，丁壬起庚子，戊癸起壬子）
   const dTGIdx=TG.indexOf(dp.tg);
-  const hTG=(Math.floor(dTGIdx/2)*2*2+hDZ)%10; // 時干由日干起算，每日子時起
   const hTGFinal=((Math.floor(dTGIdx/2)*2+hDZ)%10+10)%10;
   return[
     {tg:TG[yTG],dz:DZ[yDZ],el:TG5[yTG],el2:DZ5[yDZ],l:'年柱'},
@@ -2003,6 +2022,57 @@ function calcBazi(e){
   document.getElementById('baziSummary').textContent=summaryText;
   document.getElementById('baziResult').classList.add('show');sSuccess();
 }
+function toggleZwCalLabel(){
+  const cal=document.getElementById('zwCal').value;
+  const lbl1=document.getElementById('zwMonthLabel');
+  const lbl2=document.getElementById('zwDayLabel');
+  if(lbl1)lbl1.textContent=cal==='lunar'?'農曆月份':'國曆月份';
+  if(lbl2)lbl2.textContent=cal==='lunar'?'農曆日':'國曆日';
+}
+// 農曆新年日期表 (國曆月,日) for solar→lunar conversion
+const CNY_TABLE={
+  1920:[2,20],1921:[2,8],1922:[1,28],1923:[2,16],1924:[2,5],1925:[1,25],1926:[2,13],1927:[2,2],1928:[1,23],1929:[2,10],
+  1930:[1,30],1931:[2,17],1932:[2,6],1933:[1,26],1934:[2,14],1935:[2,4],1936:[1,24],1937:[2,11],1938:[1,31],1939:[2,19],
+  1940:[2,8],1941:[1,27],1942:[2,15],1943:[2,5],1944:[1,25],1945:[2,13],1946:[2,2],1947:[1,22],1948:[2,10],1949:[1,29],
+  1950:[2,17],1951:[2,6],1952:[1,27],1953:[2,14],1954:[2,3],1955:[1,24],1956:[2,12],1957:[1,31],1958:[2,18],1959:[2,8],
+  1960:[1,28],1961:[2,15],1962:[2,5],1963:[1,25],1964:[2,13],1965:[2,2],1966:[1,21],1967:[2,9],1968:[1,30],1969:[2,17],
+  1970:[2,6],1971:[1,27],1972:[2,15],1973:[2,3],1974:[1,23],1975:[2,11],1976:[1,31],1977:[2,18],1978:[2,7],1979:[1,28],
+  1980:[2,16],1981:[2,5],1982:[1,25],1983:[2,13],1984:[2,2],1985:[2,20],1986:[2,9],1987:[1,29],1988:[2,17],1989:[2,6],
+  1990:[1,27],1991:[2,15],1992:[2,4],1993:[1,23],1994:[2,10],1995:[1,31],1996:[2,19],1997:[2,7],1998:[1,28],1999:[2,16],
+  2000:[2,5],2001:[1,24],2002:[2,12],2003:[2,1],2004:[1,22],2005:[2,9],2006:[1,29],2007:[2,18],2008:[2,7],2009:[1,26],
+  2010:[2,14],2011:[2,3],2012:[1,23],2013:[2,10],2014:[1,31],2015:[2,19],2016:[2,8],2017:[1,28],2018:[2,16],2019:[2,5],
+  2020:[1,25],2021:[2,12],2022:[2,1],2023:[1,22],2024:[2,10],2025:[1,29],2026:[2,17]
+};
+// 近似農曆月份天數（以30,29交替為基礎）
+const LUNAR_MONTH_DAYS=[30,29,30,29,30,30,29,30,29,30,30,29];
+function solarToLunar(sy,sm,sd){
+  // 找到本年農曆新年日期
+  const cny=CNY_TABLE[sy];
+  if(!cny)return{y:sy,m:sm,d:sd,note:'年份超出範圍'};
+  const cnyDate=new Date(sy,cny[0]-1,cny[1]);
+  const targetDate=new Date(sy,sm-1,sd);
+  let lunarYear=sy, baseCNY=cnyDate;
+  if(targetDate<cnyDate){
+    lunarYear=sy-1;
+    const prevCNY=CNY_TABLE[sy-1];
+    if(!prevCNY)return{y:sy-1,m:sm,d:sd,note:'年份超出範圍'};
+    baseCNY=new Date(sy-1,prevCNY[0]-1,prevCNY[1]);
+  }
+  const daysSinceCNY=Math.round((targetDate-baseCNY)/86400000);
+  let remaining=daysSinceCNY, lunarM=1;
+  for(let i=0;i<12;i++){
+    const mLen=LUNAR_MONTH_DAYS[i];
+    if(remaining<mLen){lunarM=i+1;break;}
+    remaining-=mLen;
+  }
+  const lunarD=Math.max(1,remaining+1);
+  return{y:lunarYear,m:lunarM,d:lunarD,note:''};
+}
+// 五行局：由年干支納音決定 (水2, 木3, 金4, 土5, 火6)
+const NAYIN_JU=[4,6,3,5,4,6,2,5,4,3,2,5,6,3,2,4,6,3,5,4,6,2,5,4,3,2,5,6,3,2];
+const NAYIN_NAME=['海中金','爐中火','大林木','路旁土','劍鋒金','山頭火','澗下水','城頭土','白蠟金','楊柳木','泉中水','屋上土','霹靂火','松柏木','長流水','砂中金','山下火','平地木','壁上土','金箔金','覆燈火','天河水','大驛土','釵釧金','桑柘木','大溪水','沙中土','天上火','石榴木','大海水'];
+const JU_LABEL=['水二局','木三局','金四局','土五局','火六局'];
+const GONG_NAMES=['命宮','兄弟','夫妻','子女','財帛','疾厄','遷移','僕役','官祿','田宅','福德','父母'];
 const PALACES=['命宮','兄弟','夫妻','子女','財帛','疾厄','遷移','僕役','官祿','田宅','福德','父母'];
 const MSTARS=['紫微','天機','太陽','武曲','天同','廉貞','天府','太陰','貪狼','巨門','天相','天梁','七殺','破軍'];
 // 宮位詳細說明
@@ -2039,52 +2109,100 @@ const STAR_DESC={
 };
 function calcZiwei(e){
   e.preventDefault();
-  const m=+document.getElementById('zwMonth').value,d=+document.getElementById('zwDay').value,h=+document.getElementById('zwHour').value;
-  if(!d){alert('請填寫農曆日');return}
-  // 紫微星定位（簡化法）：以農曆生日決定紫微星所在宮位
-  // 真實排盤需配合五行局、農曆換算等複雜計算，此為展示用簡化版
-  const ziPos=((d-1+m*2)%12+12)%12; // 紫微位置（0-11）
-  // 天府星：與紫微成對宮關係
-  const tianfuPos=(ziPos+6)%12;
-  // 其他主星依固定間距排列（簡化版）
-  const starPositions={};
-  MSTARS.forEach((s,i)=>{
-    if(s==='紫微')starPositions[s]=ziPos;
-    else if(s==='天府')starPositions[s]=tianfuPos;
-    else if(['天機','太陽','武曲','天同','廉貞'].includes(s)){
-      const offset=[11,10,9,8,7];const idx=['天機','太陽','武曲','天同','廉貞'].indexOf(s);
-      starPositions[s]=(ziPos+offset[idx]+12)%12;
-    } else {
-      const offset2=[5,4,3,2,1,0,11,10];const idx2=['太陰','貪狼','巨門','天相','天梁','七殺','破軍'].indexOf(s);
-      if(idx2>=0)starPositions[s]=(tianfuPos+offset2[idx2]+12)%12;
-    }
-  });
-  // 命宮起點由時辰決定
-  const mingGong=((12-h+2)%12+12)%12;
+  const yr=+document.getElementById('zwYear').value;
+  const m=+document.getElementById('zwMonth').value;
+  const d=+document.getElementById('zwDay').value;
+  const h=+document.getElementById('zwHour').value;
+  const calType=document.getElementById('zwCal').value;
+  const gender=document.getElementById('zwGender').value;
+  const name=document.getElementById('zwName').value||'';
+  if(!yr){alert('請填寫出生年份');return}
+  if(!d){alert('請填寫出生日期');return}
+  // 農曆/國曆轉換
+  let lY=yr,lM=m,lD=d;
+  if(calType==='solar'){
+    const c=solarToLunar(yr,m,d);
+    lY=c.y;lM=c.m;lD=c.d;
+  }
+  // 年干支（農曆年）
+  const yIdx=((lY-4)%60+60)%60;
+  const yearTG=TG[yIdx%10];const yearDZ=DZ[yIdx%12];
+  // 五行局（由納音五行決定）
+  const nPair=Math.floor(yIdx/2);
+  const juN=NAYIN_JU[nPair]; // 2=水,3=木,4=金,5=土,6=火
+  const juIdx=[2,3,4,5,6].indexOf(juN);
+  const juLabel=JU_LABEL[juIdx];
+  const nayinStr=NAYIN_NAME[nPair];
+  // 命宮地支：月宮=(2+lM-1)%12，命宮=月宮-時辰+12（逆時）
+  const mingGongDZ=((2+lM-1)-h+120)%12;
+  // 身宮地支：子時起午宮，逆月順時
+  const shenGongDZ=((6+h-(lM-1))+120)%12;
+  // 紫微位置（以寅=0起，位置=(ceil(lD/juN)-1)%12）
+  const zwFromYin=(Math.ceil(lD/juN)-1+12)%12;
+  const zwDZ=(2+zwFromYin)%12; // 在子=0系統
+  // 天府星（天府+紫微DZ=12 mod 12，即天府=(12-紫微)%12）
+  const tfDZ=(12-zwDZ)%12;
+  // 紫微星系（相對紫微，逆時針方向）
+  const SP={};
+  SP['紫微']=zwDZ;
+  SP['天機']=(zwDZ-1+12)%12;
+  SP['太陽']=(zwDZ-3+12)%12;
+  SP['武曲']=(zwDZ-4+12)%12;
+  SP['天同']=(zwDZ-5+12)%12;
+  SP['廉貞']=(zwDZ-8+12)%12;
+  // 天府星系（相對天府，順時針方向）
+  SP['天府']=tfDZ;
+  SP['太陰']=(tfDZ+1)%12;
+  SP['貪狼']=(tfDZ+2)%12;
+  SP['巨門']=(tfDZ+3)%12;
+  SP['天相']=(tfDZ+4)%12;
+  SP['天梁']=(tfDZ+5)%12;
+  SP['七殺']=(tfDZ+6)%12;
+  SP['破軍']=(tfDZ+10)%12;
+  // 輔佐星（以命宮為基準）
+  SP['文昌']=(mingGongDZ+4)%12;
+  SP['文曲']=(mingGongDZ+8)%12;
+  SP['左輔']=(lM+3)%12;
+  SP['右弼']=(12-lM+1)%12;
+  // 繪製命盤
+  const DZ_NAMES=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
   const grid=document.getElementById('ziGrid');grid.innerHTML='';
-  PALACES.forEach((p,i)=>{
-    const palacePos=(mingGong+i)%12;
-    const starsInPalace=Object.entries(starPositions).filter(([s,pos])=>pos===palacePos).map(([s])=>s);
-    const div=document.createElement('div');div.className='zi-palace';
-    div.style.cursor='pointer';
-    const starHtml=starsInPalace.length>0
-      ?starsInPalace.map(s=>`<span style="color:var(--gold2)">${s}</span>`).join('<br>')
-      :'<span style="color:var(--muted);font-size:.75rem">空宮</span>';
-    div.innerHTML=`<div class="zi-pname">${p}</div><div class="zi-stars">${starHtml}</div>`;
-    // Click to show palace description
-    div.onclick=()=>{
-      const mainStar=starsInPalace[0];
-      const desc=PALACE_DESC[p]+(mainStar?'\n\n主星「'+mainStar+'」：'+(STAR_DESC[mainStar]||''):'');
-      showToast('✦ '+p+'：'+PALACE_DESC[p].slice(0,30)+'…');
-    };
+  for(let dz=0;dz<12;dz++){
+    const gongIdx=(dz-mingGongDZ+12)%12;
+    const gongName=GONG_NAMES[gongIdx];
+    const isMing=(dz===mingGongDZ);
+    const isShen=(dz===shenGongDZ);
+    const starsHere=Object.entries(SP).filter(([s,p])=>p===dz).map(([s])=>s);
+    const mainStars=['紫微','天機','太陽','武曲','天同','廉貞','天府','太陰','貪狼','巨門','天相','天梁','七殺','破軍'];
+    const mainH=starsHere.filter(s=>mainStars.includes(s));
+    const auxH=starsHere.filter(s=>!mainStars.includes(s));
+    const div=document.createElement('div');div.className='zi-palace'+(isMing?' ming-palace':'');
+    const badges=(isMing?'<span class="zp-badge ming">命</span>':'')+(isShen?'<span class="zp-badge shen">身</span>':'');
+    const starHtml=[
+      ...mainH.map(s=>`<span class="zp-star main-star">${s}</span>`),
+      ...auxH.map(s=>`<span class="zp-star aux-star">${s}</span>`)
+    ].join('');
+    div.innerHTML=`<div class="zi-pname">${gongName}<span class="zp-dz">${DZ_NAMES[dz]}</span>${badges}</div><div class="zi-stars">${starHtml||'<span style="color:var(--muted);font-size:.75rem">空宮</span>'}</div>`;
+    div.onclick=(()=>{const g=gongName,ms=starsHere.slice();return()=>{const desc=PALACE_DESC[g]||'';const sd=ms.map(s=>STAR_DESC[s]?s+'：'+STAR_DESC[s]:'').filter(Boolean).join('\n');showToast('✦ '+g+'（'+DZ_NAMES[dz]+'）：'+desc.slice(0,30)+'…');}})();
     grid.appendChild(div);
-  });
-  // Show summary
-  const mingStars=Object.entries(starPositions).filter(([s,pos])=>pos===mingGong).map(([s])=>s);
+  }
+  // 命宮主星
+  const mingStars=Object.entries(SP).filter(([s,p])=>p===mingGongDZ&&['紫微','天機','太陽','武曲','天同','廉貞','天府','太陰','貪狼','巨門','天相','天梁','七殺','破軍'].includes(s)).map(([s])=>s);
+  const mainMingStar=mingStars[0]||'空宮';
+  const genderTxt=gender==='m'?'男':'女';
+  const calInfo=calType==='solar'?`國曆 ${yr}年${m}月${d}日（換算農曆 ${lY}年${lM}月${lD}日）`:`農曆 ${lY}年${lM}月${lD}日`;
   const sumEl=document.getElementById('ziweiSummary');
   if(sumEl){
-    const mainMingStar=mingStars[0]||'無主星';
-    sumEl.textContent='命宮主星：「'+mainMingStar+'」\n'+(STAR_DESC[mainMingStar]||'空宮命格，受鄰宮星曜借力，性格多元，適應力強。')+'\n\n⚠ 本排盤為簡化展示版，精確紫微斗數需配合完整農曆換算與五行局計算。如需專業完整命盤，歡迎預約諮詢。';
+    sumEl.textContent=`${name?name+'，':''}${genderTxt}命
+出生：${calInfo}
+農曆年干支：${yearTG}${yearDZ}年（${nayinStr}）
+五行局：${juLabel}
+命宮：${DZ_NAMES[mingGongDZ]}宮，身宮：${DZ_NAMES[shenGongDZ]}宮
+命宮主星：${mainMingStar||'空宮'}
+
+${STAR_DESC[mainMingStar]||'空宮命格，受鄰宮星曜借力，性格多元圓融，適應力強，善於察言觀色。'}
+
+⚠ 本排盤依傳統紫微斗數基本演算法排列，含主星、輔星位置。如需大運流年、六親宮詳解，歡迎預約專業諮詢。`;
     sumEl.style.display='block';
   }
   document.getElementById('ziweiResult').classList.add('show');sSuccess();
